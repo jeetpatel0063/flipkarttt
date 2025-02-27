@@ -4,27 +4,70 @@
   {% block body %}
   <div class="container-fluid">
     <div class="row">
+
+      <div class="contai">
+        <div class="row">
+          <div class="col">
+          <a href="/electronicslist">
+            <img src="{% static 'images/appliances.png' %}" alt="" width="80px" height="70px"> 
+            Appliances 
+          </a>
+        </div>
+          <div class="col">
+          <a href="/electronicslist">
+            <img src="{% static 'images/beauty.png' %}" alt="" width="80px" height="70px"> 
+            Beauty Products 
+          </a>
+        </div>
+          <div class="col">
+          <a href="/electronicslist">
+            <img src="{% static 'images/furniture.png' %}" alt="" width="80px" height="70px"> 
+            Furniture  
+          </a>
+        </div>
+          <div class="col">
+          <a href="/clothlist">
+            <img src="{% static 'images/fashion.png' %}" alt="" width="80px" height="70px"> 
+            Fashion 
+          </a>
+        </div>
+          <div class="col">
+          <a href="/electronicslist">
+            <img src="{% static 'images/grocery.png' %}" alt="" width="80px" height="70px"> 
+            Grocery 
+          </a>
+        </div>
+
+        </div>
+
+      </div>
+
+      <!-- search category starts here -->
       <div class="col-2">
         <div>
           <h5>Cateogery Seacrh </h5>
           <hr>
-          <a href="#">By Mobile</a> <br>
-          <a href="#">By Electronics</a> <br>
-          <a href="#">By shoes</a> <br>
-          <a href="#">By Clots</a><br>
+          <a href="/mobilelist">By Mobile</a> <br>
+          <a href="/electronicslist">By Electronics</a> <br>
+          <a href="/shoeslist">By shoes</a> <br>
+          <a href="/clothlist">By Cloths</a><br>
         </div> <br>
         <div>
           <h5> Search by Price Range</h5>
           <hr>
-          <form method="post" action="#">
+          <form method="post" action="/showpricerange/">
+            {% csrf_token %}
             <input type="number" placeholder="Min Price" name="min"> <br> <br>
             <input type="number" placeholder="Max Price" name="max"> <br> <br>
             <input type="submit" value="Submit">
           </form>
         </div> 
 
-        <div>
-          <h5>Sort by </h5>
+        <div class="mt-3">
+          <h5>Sort By Price</h5>
+          <hr>
+          <a href="/sortingbyprice/?sort=low_to_high">low to high</a><br>
+          <a href="/sortingbyprice/?sort=high_to_low">High to Low</a>
         </div>
         
       </div>
@@ -60,6 +103,10 @@
          <div class="container">
           <div class="row">
 
+            {% for m in messages %}
+            <h1><mark>{{m}}</mark></h1>
+            {% endfor %}
+
             {% for x in allproducts %}
             <div class="col-md-4">
               <div class="card" style="width: 18rem;">
@@ -67,6 +114,7 @@
                 <div class="card-body">
                   <h5 class="card-title">{{x.productname}}</h5>
                   <p class="card-text">{{x.description}}</p>
+                  <p class="card-text">Price:{{x.price}}</p>
                   <a href="#" class="btn btn-primary">Add to Cart</a>
                   <a href="#" class="btn btn-primary">Buy Now</a>
                 </div>
