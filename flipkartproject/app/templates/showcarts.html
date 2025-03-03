@@ -44,13 +44,13 @@
 
                 <p>
                 <strong>QTY:</strong>
-                <a href="#"><button class="btn btn-danger">-</button></a>
+                <a href="/updateqty/0/{{x.productid.productid}}"><button class="btn btn-danger">-</button></a>
                 <input type="number" value="{{x.qty}}" style="width:30px;">
-                <a href="#"><button class="btn btn-success">+</button></a>
+                <a href="/updateqty/1/{{x.productid.productid}}"><button class="btn btn-success">+</button></a>
                 </p>
 
-                <a href="#" class="btn btn-warning"> Make Payment</a>
-                <a href="#" class="btn btn-primary"> Remove Cart</a>
+                <a href="/addaddress" class="btn btn-warning"> Make Payment</a>
+                <a href="/removecart/{{x.productid.productid}}" class="btn btn-primary"> Remove Cart</a>
             </div>
             
         </div>
@@ -63,7 +63,7 @@
         <!-- totalsection starts here -->
         <div class="col-md-3">
             <div class="row">
-                <h3 class="btn-danger text-white">Total Amount Section</h3>
+                <h3 class="btn-danger text-black">Total Amount Section</h3>
                 <h5><strong>Total items:</strong></h5>
                 <hr>
                 <h5><strong>Total Amount: Rs</strong></h5>
