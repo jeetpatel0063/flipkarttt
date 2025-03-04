@@ -3,7 +3,7 @@
 {% block body %}
 
 <div class="container">
-    <div class="row">
+    <div class="row text-center">
         <h1 class="text-center">Select Address for Payment</h1>
         <form method="post">
             {% csrf_token %}
@@ -27,7 +27,9 @@
 
             </div>
 
-        </form>
+        </form> <br> 
+        <a href="/payment"><input type="submit" value="Proceed to Payment" class="btn btn-primary"></a>
+        <a href="/addaddress"><input type="button" value="Cancle" class="btn btn-danger"></a>
     </div>
 </div>
 
