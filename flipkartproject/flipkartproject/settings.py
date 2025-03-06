@@ -159,5 +159,5 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ""
 # EMAIL_HOST="smtp.gmail.com"
 # EMAIL_USE_TSL=True
 # EMAIL_PORT=587
-# EMAIL_HOST_USER="duplicatebeast63@gmail.com"
-# EMAIL_HOST_PASSWORD=""
+# EMAIL_HOST_USER="nimbusairline2@gmail.com"
+# EMAIL_HOST_PASSWORD="jbaw tdpu jigg ovgc"
