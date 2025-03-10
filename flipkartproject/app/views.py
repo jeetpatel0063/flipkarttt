@@ -327,11 +327,38 @@ def updateqty(req,qv,productid):
 
 from .forms import AddressForm
 
-def addaddress(req):
+def addaddress_all(req):
     if req.user.is_authenticated:
+       
         if req.method=="POST":
             form=AddressForm(req.POST)
+            if form.is_valid():
+                address=form.save(commit=False)
+                address.userid=req.user
+                address.save()
+                return redirect("/showaddress")
+        else:
+            form=AddressForm()
+        context={'form':form}
+        return render(req,'addaddress.html',context)
+    else:
+        return redirect("/signin")   
 
+
+def addaddress_single(req,productid=None):
+    if req.user.is_authenticated:
+        print(productid)
+        if productid==None:
+            payment_type="all"
+            req.session["payment_type"]=payment_type
+        else:
+            payment_type="single"
+            req.session["payment_type"]=payment_type
+            req.session["productid"]=productid
+        print(payment_type)
+       
+        if req.method=="POST":
+            form=AddressForm(req.POST)
             if form.is_valid():
                 address=form.save(commit=False)
                 address.userid=req.user
@@ -362,7 +389,15 @@ from django.core.mail import send_mail
 def payment(req):
     if req.user.is_authenticated:
         try:
-            cartitems=Cart.objects.filter(userid=req.user.id)
+            payment_type=req.session.get("payment_type")
+            productid=req.session.get("productid")
+            print(payment_type,productid)
+            
+            if payment_type=="single":
+                cartitems=Cart.objects.filter(userid=req.user.id,productid=productid)
+            else:
+                cartitems=Cart.objects.filter(userid=req.user.id)
+
             totalamount=sum(i.productid.price*i.qty for i in cartitems)
             print(totalamount)
             userid=req.user
@@ -409,8 +444,14 @@ from django.views.generic.list import ListView
 
 class ProductRegister(CreateView):
     model=Product
-    fields="__all__"
-    success_url='/'
+    # fields="__all__"
+    fields=["productid","productname","category","description","price","images"]
+    success_url='/ProductList'
+
+    def form_valid(self, form):
+        form.instance.userid = self.request.user
+        return super().form_valid(form)
+
 
 
 class ProductList(ListView):
@@ -419,6 +460,15 @@ class ProductList(ListView):
         user=self.request.user
         return Product.objects.filter(userid=user)
         
+class ProductDelete(DeleteView):
+    model=Product
+    success_url='/ProductList'
 
+class ProductUpdate(UpdateView):
+    model=Product
+    template_name_suffix="_update_form"
+    # fields="__all__"
+    fields=["productname","category","description","price","images"]
+    success_url='/ProductList'
 
 

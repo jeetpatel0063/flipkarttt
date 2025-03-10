@@ -11,22 +11,24 @@
             <div class="card-body p4">
                 <form method="post">
                     {% csrf_token %}
+                    
+                    
                     <div class="form-group">
-                        <label>Mobile Number:</label>
+                        <label for="mobile">Mobile Number:</label>
                         {{form.mobile}}
                     </div>
                     <div class="form-group">
-                        <label>Address:</label>
+                        <label for="address">Address:</label>
                         {{form.address}}
                     </div>
                     <div class="form-group">
-                        <label>Pin Code:</label>
+                        <label for="pincode">Pin Code:</label>
                         {{form.pincode}}
                     </div>
-
+                    
                     <input type="submit" value="Save Address" class="btn btn-primary">
-                    <a href="/showcarts"><input type="button" value="Cancle" class="btn btn-danger"></a>
                 </form>
+                <a href="/showcarts"><input type="button" value="Cancle" class="btn btn-danger"></a>
             </div>
         </div>
         <div class="text-center mt-3">

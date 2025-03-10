@@ -49,7 +49,7 @@
                 <a href="/updateqty/1/{{x.productid.productid}}"><button class="btn btn-success">+</button></a>
                 </p>
 
-                <a href="/addaddress" class="btn btn-warning"> Make Payment</a>
+                <a href="/addaddress_single/{{x.productid.productid}}" class="btn btn-warning"> Make Payment</a>
                 <a href="/removecart/{{x.productid.productid}}" class="btn btn-primary"> Remove Cart</a>
             </div>
             
@@ -68,7 +68,7 @@
                 <hr>
                 <h5><strong>Total Amount : Rs {{totalamount}}/-</strong></h5>
                 {% if totalitems >= 1 %}
-                <a href="/addaddress" class="btn btn-danger">Make Payment</a>
+                <a href="/addaddress_all" class="btn btn-danger">Make Payment</a>
                 {% else %}
                 <a href="#"><button class="btn btn-danger" disabled> Make Payment </button> </a>
                 {% endif %}
